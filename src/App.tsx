@@ -34,30 +34,30 @@ function App() {
   };
 
   return (
-    <div className="m-auto h-svh" style={{ background: `${color}` }}>
+    <div className="m-auto h-svh">
       <form
-        className="p-4 items-center flex gap-5 bg-slate-500/50"
+        className="p-4 items-center grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-5 bg-slate-500/50"
         action="submit"
       >
-        <div className="w-full h-full bento-box flex flex-col items-center justify-center">
+        <div className="h-32 bento-box col-span-2 flex flex-col items-center justify-center">
           <h1>Rive File</h1>
           <input
-            className="h-full bento-box "
+            className=" w-full bento-box "
             type="file"
             name="file"
             onChange={handleFileChange}
             accept=".riv"
           />
         </div>
-        <div className="flex flex-col bento-box w-full h-full items-center">
+        <div className="flex flex-col col-span-2 bento-box w-full h-32 items-center">
           <h1>Background color</h1>
           <input
-            className="w-full h-20 border-2 rounded-xl"
+            className="w-full h-full border-2 rounded-xl"
             type="color"
             onChange={handleColorChange}
           />
         </div>
-        <div className="w-full h-full bento-box flex flex-col items-center ">
+        <div className="w-full h-32 col-span-2 bento-box flex flex-col items-center ">
           <h1>State Machine</h1>
           {stateMachineNames?.length > 0 && (
             <select
@@ -74,7 +74,7 @@ function App() {
             </select>
           )}
         </div>
-        <div className="w-full h-full bento-box  flex flex-col items-center ">
+        <div className="w-full h-32 bento-box col-span-2 flex flex-col items-center ">
           <h1>Animation</h1>
           {stateMachineNames?.length > 0 && (
             <select
@@ -96,6 +96,7 @@ function App() {
       <div
         key={riveSrc + stateMachineName + animationName}
         className="w-full h-[calc(100%-200px)] border-2"
+        style={{ background: `${color}` }}
       >
         <RiveCanvas
           animation={animationName}
