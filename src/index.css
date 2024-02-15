@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bento-box {
+  @apply rounded-xl p-6 bg-slate-500/50 hover:bg-slate-500/10 border-2;
+}
+.bento-box-transparent {
+  @apply rounded-xl p-6 bg-transparent border-2;
+}
