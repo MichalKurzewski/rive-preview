@@ -24,22 +24,24 @@ function App() {
 
   return (
     <div className="container m-auto h-svh">
-      <form className="p-4 border-b-2" action="submit">
+      <form className="p-4 border-b-2 flex items-center" action="submit">
         <input type="file" name="file" onChange={handleFileChange} />
-        {stateMachineNames?.length > 0 && (
-          <select
-            value={stateMachineName}
-            onChange={handleStateMachineChange}
-            className="ml-4"
-          >
-            <option value="">Select a State Machine</option>
-            {stateMachineNames.map((name, index) => (
-              <option key={index} value={name}>
-                {name}
-              </option>
-            ))}
-          </select>
-        )}
+        <div className="border-2 w-52 p-2">
+          {stateMachineNames?.length > 0 && (
+            <select
+              value={stateMachineName}
+              onChange={handleStateMachineChange}
+              className="ml-4"
+            >
+              <option value="">Select a State Machine</option>
+              {stateMachineNames.map((name, index) => (
+                <option key={index} value={name}>
+                  {name}
+                </option>
+              ))}
+            </select>
+          )}
+        </div>
       </form>
 
       <div
