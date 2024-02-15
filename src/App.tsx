@@ -6,19 +6,21 @@ function App() {
     "https://cdn.rive.app/animations/vehicles.riv"
   );
   const [stateMachineName, setStateMachineName] = useState("");
-  const handleFileChange = (event) => {
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    const file = event.target.files[0];
-    if (file) {
-      const blobUrl = URL.createObjectURL(file);
-      setRiveSrc(blobUrl);
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      if (file) {
+        const blobUrl = URL.createObjectURL(file);
+        setRiveSrc(blobUrl);
+      }
     }
   };
-  const handleStateName = (event) => {
+  const handleStateName = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     setStateMachineName(event.target.value);
   };
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13) {
       event.preventDefault();
     }
