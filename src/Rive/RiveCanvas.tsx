@@ -4,7 +4,6 @@ interface IRiveCanvasProps {
   stateMachineName: string;
 }
 const RiveCanvas: React.FC<IRiveCanvasProps> = ({ src, stateMachineName }) => {
-  console.log(src);
   const { RiveComponent } = useRive({
     src: src,
     stateMachines: stateMachineName,
