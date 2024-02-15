@@ -1,13 +1,11 @@
 import { useState } from "react";
 import RiveCanvas from "./Rive/RiveCanvas";
-import { useDebounce } from "use-debounce";
-
 function App() {
   const [riveSrc, setRiveSrc] = useState(
     "https://cdn.rive.app/animations/vehicles.riv"
   );
-  const [stateMachineName, setStateMachineName] = useState("");
-  const [debouncedValue] = useDebounce(stateMachineName, 500);
+  const [stateMachineNames, setStateMachineNames] = useState<string[]>([]);
+  const [stateMachineName, setStateMachineName] = useState<string>("");
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     if (event.target.files && event.target.files.length > 0) {
@@ -18,36 +16,41 @@ function App() {
       }
     }
   };
-
-  const handleStateName = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
+  const handleStateMachineChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setStateMachineName(event.target.value);
-  };
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-    }
   };
 
   return (
     <div className="container m-auto h-svh">
       <form className="p-4 border-b-2" action="submit">
         <input type="file" name="file" onChange={handleFileChange} />
-        <input
-          className="p-4 border-2"
-          type="text"
-          placeholder="State Machine Name"
-          onChange={handleStateName}
-          onKeyDown={handleKeyDown}
-        />
+        {stateMachineNames?.length > 0 && (
+          <select
+            value={stateMachineName}
+            onChange={handleStateMachineChange}
+            className="ml-4"
+          >
+            <option value="">Select a State Machine</option>
+            {stateMachineNames.map((name, index) => (
+              <option key={index} value={name}>
+                {name}
+              </option>
+            ))}
+          </select>
+        )}
       </form>
 
       <div
-        key={riveSrc + debouncedValue}
+        key={riveSrc + stateMachineName}
         className="w-full h-[calc(100%-150px)]"
       >
-        <RiveCanvas src={riveSrc} stateMachineName={debouncedValue} />
+        <RiveCanvas
+          src={riveSrc}
+          stateMachineName={stateMachineName}
+          setStateMachineNames={setStateMachineNames}
+        />
       </div>
     </div>
   );
